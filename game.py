@@ -20,21 +20,14 @@ def print_board(board):
     print(f'-------')
 
 def game_is_won(board):
-    if board[0] != ' ' and board[0] == board[1] == board[2]:
-        return True
-    elif board[3] != ' ' and board[3] == board[4] == board[5]:
-        return True
-    elif board[6] != ' ' and board[6] == board[7] == board[8]:
-        return True
-    elif board[0] != ' ' and board[0] == board[3] == board[6]:
-        return True
-    elif board[1] != ' ' and board[1] == board[4] == board[7]:
-        return True
-    elif board[2] != ' ' and board[2] == board[5] == board[8]:
-        return True
-    elif board[0] != ' ' and board[0] == board[4] == board[8]:
-        return True
-    elif board[6] != ' ' and board[6] == board[4] == board[2]:
+    if (board[0] == board[1] == board[2] != ' ') or \
+       (board[3] == board[4] == board[5] != ' ') or \
+       (board[6] == board[7] == board[8] != ' ') or \
+       (board[0] == board[3] == board[6] != ' ') or \
+       (board[1] == board[4] == board[7] != ' ') or \
+       (board[2] == board[5] == board[8] != ' ') or \
+       (board[0] == board[4] == board[8] != ' ') or \
+       (board[6] == board[4] == board[2] != ' '):
         return True
     else:
         return False
@@ -73,6 +66,9 @@ while(ongoing):
 
     if game_is_won(board):
         print(f'Game won by {player}!')
+        ongoing = False
+    elif ' ' not in board:
+        print(f'Game is a tie!')
         ongoing = False
     else:
         player = 'X' if player == 'O' else 'O'
